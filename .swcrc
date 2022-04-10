@@ -1,0 +1,17 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript"
+    }
+  },
+  "env": {
+    "targets": {
+      "node": 17
+    }
+  },
+  "sourceMaps": true,
+  "inlineSourcesContent": true,
+  "module": {
+    "type": "commonjs"
+  }
+}

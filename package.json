@@ -1,0 +1,99 @@
+{
+  "name": "crap-stories-node",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": ">=17.x",
+    "npm": ">=8.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "start:inspect": "npm run build && node --inspect dist/index.js",
+    "start:watch": "nodemon --exec yarn start:inspect",
+    "test": "jest --coverage --watch --runInBand",
+    "test:ci": "jest --coverage --watchAll=false --runInBand",
+    "build": "swc src -d dist",
+    "heroku-postbuild": "yarn build && npm run migrate",
+    "lint": "eslint src/**/*.js"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es2021": true,
+      "jest": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "rules": {}
+  },
+  "author": "",
+  "license": "WTFPL",
+  "dependencies": {
+    "@hapi/joi": "17.1.1",
+    "body-parser": "1.20.0",
+    "compression": "1.7.4",
+    "consola": "2.15.3",
+    "cors": "2.8.5",
+    "dotenv": "16.0.0",
+    "express": "4.17.3",
+    "express-joi-validation": "5.0.1",
+    "http-status": "1.5.0",
+    "knex": "1.0.5",
+    "pg": "8.7.3",
+    "uuid": "8.3.2"
+  },
+  "devDependencies": {
+    "@swc-node/register": "1.4.2",
+    "@swc/cli": "0.1.57",
+    "@swc/core": "1.2.165",
+    "@swc/jest": "0.2.20",
+    "eslint": "8.13.0",
+    "jest": "27.5.1",
+    "nodemon": "2.0.15",
+    "prettier": "2.6.2",
+    "supertest": "6.2.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(t|j)s?$": [
+        "@swc/jest"
+      ]
+    },
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "node_modules/",
+      "src/config/"
+    ],
+    "watchPathIgnorePatterns": [
+      "node_modules/",
+      "src/config/",
+      "dist/",
+      "coverage/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    },
+    "coverageReporters": [
+      "cobertura",
+      "json",
+      "lcov",
+      "text"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js?$",
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ]
+  },
+  "prettier": {
+    "printWidth": 140
+  }
+}
