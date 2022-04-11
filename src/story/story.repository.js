@@ -8,12 +8,6 @@ const storyColums = ["id", "uuid", "title", "imageUrl", "created_at", "updated_a
 export default class StoryRepository extends PostgresDataSource {
   tableName = "story";
 
-  async getStories() {
-    const stories = await this.knex(this.tableName).select(storyColums);
-
-    return stories;
-  }
-
   async getStory(uuid) {
     const story = await this.knex(this.tableName).select(storyColums).where({ uuid }).first();
 
@@ -26,5 +20,9 @@ export default class StoryRepository extends PostgresDataSource {
 
   async createStory({ title, imageUrl }) {
     return await this.knex(this.tableName).insert({ uuid: uuid(), title, imageUrl }).returning(storyColums);
+  }
+
+  async getRandomStory() {
+    return await this.knex(this.tableName).select(storyColums).orderBy(this.knex.raw("random()")).first();
   }
 }

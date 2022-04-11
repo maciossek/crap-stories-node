@@ -3,7 +3,7 @@ import "dotenv/config";
 import env from "./config/env.js";
 import app from "./config/express";
 import consola from "consola";
-import knex from "./config/postgres";
+import knex from "./config/knex";
 
 const server = app.listen(env.port, async () => {
   consola.info(`🚀 Server listening on port http://localhost:${env.port}`);

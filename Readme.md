@@ -51,6 +51,12 @@ Create a build in the dist folder with typescript definition files
 
 ### Migrations
 
+To create a migration:
+
+```sh
+node -r @swc-node/register node_modules/.bin/knex migrate:make table_name
+```
+
 To run all migrations:
 
 ```sh

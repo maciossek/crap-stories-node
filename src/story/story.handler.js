@@ -1,24 +1,25 @@
 import StoryRepository from "./story.repository";
 import consola from "consola";
 
-export async function getStories(req, res, next) {
+export async function getStory(req, res, next) {
   try {
     const storyRepository = new StoryRepository();
-    const stories = await storyRepository.getStories();
-    stories.map((u) => delete u.id);
-    res.json(stories);
+    const { uuid } = req.params;
+
+    const story = await storyRepository.getStory(uuid);
+    delete story.id;
+    res.json(story);
   } catch (err) {
     consola.error(err);
     next(err);
   }
 }
 
-export async function getStory(req, res, next) {
+export async function getRandomStory(req, res, next) {
   try {
     const storyRepository = new StoryRepository();
-    const { uuid } = req.body;
-    const story = await storyRepository.getStory(uuid);
-    story.map((u) => delete u.id);
+    const story = await storyRepository.getRandomStory();
+    delete story.id;
     res.json(story);
   } catch (err) {
     consola.error(err);
