@@ -1,4 +1,5 @@
 import apiError from "./apiError";
-import logRequests from "./logRquests";
+import logRequests from "./logRequests";
+import tokenAuthentication from "./tokenAuthentication";
 
-export { apiError, logRequests };
+export { apiError, logRequests, tokenAuthentication };

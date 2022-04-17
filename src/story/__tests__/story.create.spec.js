@@ -2,7 +2,7 @@ import request from "supertest";
 import knex from "../../config/knex";
 import StoryRepository from "../story.repository";
 
-jest.mock("consola");
+jest.mock("consola").mock("../../middleware/tokenAuthentication");
 
 describe("Story Create Route", () => {
   beforeAll(async () => {

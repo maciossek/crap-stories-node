@@ -3,7 +3,7 @@ import knex from "../../config/knex";
 import { v4 as uuid } from "uuid";
 import StoryRepository from "../story.repository";
 
-jest.mock("consola");
+jest.mock("consola").mock("../../middleware/tokenAuthentication");
 
 describe("Story getRandomStory Route", () => {
   beforeAll(async () => {

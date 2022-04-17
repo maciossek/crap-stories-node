@@ -10,7 +10,7 @@
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "start:inspect": "npm run build && node --inspect dist/index.js",
-    "start:watch": "nodemon --exec yarn start:inspect",
+    "start:watch": "nodemon --ignore dist/ --exec yarn start",
     "test": "jest --coverage --watch --runInBand",
     "test:ci": "jest --coverage --watchAll=false --runInBand",
     "build": "swc src -d dist",
@@ -42,6 +42,8 @@
     "express": "4.17.3",
     "express-joi-validation": "5.0.1",
     "http-status": "1.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.0.5",
     "knex": "1.0.5",
     "pg": "8.7.3",
     "uuid": "8.3.2"

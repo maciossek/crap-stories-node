@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(compress());
-app.use(mw.logRequests(consola));
+// app.use(mw.logRequests(consola));
 
 app.use("/", routes);
 

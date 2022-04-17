@@ -9,6 +9,7 @@ const envVarsSchema = Joi.object({
   SOURCE_VERSION: Joi.string().default(process.env.HEROKU_SLUG_COMMIT ? process.env.HEROKU_SLUG_COMMIT.substring(0, 7) : "?????"),
   DB_HOST: Joi.string(),
   CORS_URLS: Joi.string().default("https://app.neurolabs.ai"),
+  JWKS_URI: Joi.string(),
 })
   .unknown()
   .required();
@@ -27,6 +28,7 @@ const config = {
   dbHost: envVars.DB_HOST,
   logLevel: envVars.LOG_LEVEL,
   corsUrls: envVars.CORS_URLS.split(" "),
+  jwksUri: envVars.JWKS_URI,
 };
 
 export default config;
