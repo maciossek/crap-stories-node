@@ -10,11 +10,11 @@
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "start:inspect": "npm run build && node --inspect dist/index.js",
-    "start:watch": "nodemon --ignore dist/ --exec yarn start",
+    "start:watch": "nodemon --ignore dist/ --exec npm start",
     "test": "jest --coverage --watch --runInBand",
     "test:ci": "jest --coverage --watchAll=false --runInBand",
     "build": "swc src -d dist",
-    "heroku-postbuild": "yarn build && npm run migrate",
+    "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node -r @swc-node/register node_modules/.bin/knex migrate:latest",
     "lint": "eslint src/**/*.js"
   },
