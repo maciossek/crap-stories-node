@@ -1,0 +1,81 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [17]
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:14
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: hft
+          POSTGRES_USER: hft
+          PGTZ: UTC
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
+      - name: Install dependencies
+        run: npm install
+      - name: Run Database migrations
+        run: npm run migrate
+        env:
+          DB_HOST: postgresql://hft:hft@localhost:5432/hft
+          JWKS_URI: none-of-your-business
+      - name: Run Tests
+        run: npm run test:ci
+        env:
+          DB_HOST: postgresql://hft:hft@localhost:5432/hft
+          JWKS_URI: none-of-your-business
+      - name: Run Build
+        run: npm run build
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/cobertura-coverage.xml
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [test-and-build]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "hft-crap-stories-node"
+          heroku_email: "mathias.maciossek@gmail.com"
+          buildpack: "https://github.com/mars/create-react-app-buildpack"

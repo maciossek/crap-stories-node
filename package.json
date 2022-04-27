@@ -15,6 +15,7 @@
     "test:ci": "jest --coverage --watchAll=false --runInBand",
     "build": "swc src -d dist",
     "heroku-postbuild": "yarn build && npm run migrate",
+    "migrate": "node -r @swc-node/register node_modules/.bin/knex migrate:latest",
     "lint": "eslint src/**/*.js"
   },
   "eslintConfig": {
