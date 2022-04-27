@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import StoryRepository from "../story.repository";
 
 const storyUuid = uuid();
-jest.mock("consola");
+jest.mock("consola").mock("../../middleware/tokenAuthentication");
 
 describe("Story getStory Route", () => {
   beforeAll(async () => {

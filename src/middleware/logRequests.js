@@ -1,6 +1,6 @@
 export default function logRequests(logger) {
   return (req, res, next) => {
-    logger.trace({ req }, "Incoming request");
+    logger.info(req.body, "Incoming request");
 
     next();
   };
