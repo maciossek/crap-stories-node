@@ -1,5 +1,5 @@
 import request from "supertest";
-import ApiErrorMiddleware from "../ApiError";
+import ApiErrorMiddleware from "../apiError";
 
 let app;
 
