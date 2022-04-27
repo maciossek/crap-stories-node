@@ -78,4 +78,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "hft-crap-stories-node"
           heroku_email: "mathias.maciossek@gmail.com"
-          buildpack: "https://github.com/mars/create-react-app-buildpack"
