@@ -10,7 +10,7 @@ describe("Story Create Route", () => {
   });
 
   it("/story POST should create a new story", async () => {
-    const response = await request(global.app).post("/story").send({ title: "test", imageUrl: "test url" });
+    const response = await request(global.app).post("/story").send({ title: "test", imageUrl: "test url1" });
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({ title: "test", imageUrl: "test url" });
