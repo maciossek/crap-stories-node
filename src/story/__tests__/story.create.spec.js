@@ -13,7 +13,7 @@ describe("Story Create Route", () => {
     const response = await request(global.app).post("/story").send({ title: "test", imageUrl: "test url1" });
 
     expect(response.status).toBe(200);
-    expect(response.body).toMatchObject({ title: "test", imageUrl: "test url" });
+    expect(response.body).toMatchObject({ title: "test", imageUrl: "test url1" });
   });
 
   it("should throw an error when knex.select fails", async () => {
