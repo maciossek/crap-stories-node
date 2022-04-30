@@ -1,0 +1,32 @@
+type Story {
+  uuid: ID!
+  title: String!
+  imageUrl: String!
+  created_at: String!
+  updated_at: String!
+}
+
+type StoryResult {
+  success: Boolean!
+  errors: [String]
+  story: Story
+}
+
+type StoriesResult {
+  success: Boolean!
+  errors: [String]
+  stories: [Story!]
+}
+
+input CreateStoryInput {
+  title: String!
+  imageUrl: String!
+}
+
+type Query {
+  getRandomStory: StoryResult! @isAuthenticated
+}
+
+type Mutation {
+  createStory(input: CreateStoryInput!): StoryResult! @isAuthenticated
+}
