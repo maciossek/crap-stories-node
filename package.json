@@ -13,7 +13,7 @@
     "start:watch": "nodemon --ignore dist/ --exec npm start",
     "test": "jest --coverage --watch --runInBand",
     "test:ci": "jest --coverage --watchAll=false --runInBand",
-    "build": "swc src -d dist",
+    "build": "swc src -d dist --copy-files",
     "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node -r @swc-node/register node_modules/.bin/knex migrate:latest",
     "lint": "eslint src/**/*.js"
@@ -34,7 +34,13 @@
   "author": "",
   "license": "WTFPL",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.10",
+    "@graphql-tools/schema": "^8.3.10",
+    "@graphql-tools/schema-merging": "^5.0.1-alpha-78275ec.0",
+    "@graphql-tools/utils": "^8.6.9",
     "@hapi/joi": "17.1.1",
+    "apollo-server-express": "^3.6.7",
     "body-parser": "1.20.0",
     "compression": "1.7.4",
     "consola": "2.15.3",
@@ -94,6 +100,11 @@
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js?$",
     "setupFilesAfterEnv": [
       "./jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules/",
+      "dist/",
+      "coverage/"
     ]
   },
   "prettier": {
