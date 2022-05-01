@@ -10,6 +10,8 @@ const envVarsSchema = Joi.object({
   DB_HOST: Joi.string(),
   CORS_URLS: Joi.string().default("https://app.neurolabs.ai"),
   JWKS_URI: Joi.string(),
+  AWS_ACCESS_KEY_ID: Joi.string(),
+  AWS_SECRET_ACCESS_KEY: Joi.string(),
 })
   .unknown()
   .required();
@@ -29,6 +31,8 @@ const config = {
   logLevel: envVars.LOG_LEVEL,
   corsUrls: envVars.CORS_URLS.split(" "),
   jwksUri: envVars.JWKS_URI,
+  awsAccessKeyId: envVars.AWS_ACCESS_KEY_ID,
+  awsSecretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
 };
 
 export default config;

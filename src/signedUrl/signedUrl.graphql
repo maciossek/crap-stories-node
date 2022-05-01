@@ -1,0 +1,13 @@
+type SignedUrlResult {
+  success: Boolean!
+  errors: [String]
+  signedUrl: String
+}
+
+input SignedUrlInput {
+  fileType: String!
+}
+
+type Query {
+  generateUrl(input: SignedUrlInput!): SignedUrlResult! @isAuthenticated
+}

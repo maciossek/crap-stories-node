@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: S3 Bucket for crap-stories
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: "hft-crap-stories"
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - GET
+              - HEAD
+              - PUT
+              - POST
+            AllowedOrigins:
+              - "*"
+    DeletionPolicy: Retain
+
+  S3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Principal: "*"
+            Resource:
+              - !Join
+                - "/"
+                - - !GetAtt S3Bucket.Arn
+                  - "*"
+
+Outputs:
+  BucketARN:
+    Description: S3 Bucket Amazon Resource Name
+    Value: !GetAtt S3Bucket.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-BucketARN
