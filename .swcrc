@@ -6,11 +6,10 @@
   },
   "env": {
     "targets": {
-      "node": 17
+      "node": 19
     }
   },
-  "sourceMaps": true,
-  "inlineSourcesContent": true,
+  "sourceMaps": "inline",
   "module": {
     "type": "commonjs"
   }
