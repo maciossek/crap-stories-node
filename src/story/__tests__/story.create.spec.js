@@ -2,8 +2,6 @@ import request from "supertest";
 import knex from "../../config/knex";
 import StoryRepository from "../story.repository";
 
-jest.mock("consola");
-
 describe("Story Create Route", () => {
   beforeAll(async () => {
     await knex("story").del();

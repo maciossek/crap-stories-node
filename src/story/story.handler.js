@@ -31,7 +31,7 @@ export async function createStory(req, res, next) {
   try {
     const storyRepository = new StoryRepository();
     const { title, imageUrl } = req.body;
-    const story = await storyRepository.createStory({ title, imageUrl });
+    const story = await storyRepository.createStory({ title, imageUrl, userId: req.user.id });
     story.map((u) => delete u.id);
 
     res.json(story[0]);

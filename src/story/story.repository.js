@@ -18,8 +18,8 @@ export default class StoryRepository extends PostgresDataSource {
     return story;
   }
 
-  async createStory({ title, imageUrl }) {
-    return await this.knex(this.tableName).insert({ uuid: uuid(), title, imageUrl }).returning(storyColums);
+  async createStory({ title, imageUrl, userId }) {
+    return await this.knex(this.tableName).insert({ uuid: uuid(), title, imageUrl, userId }).returning(storyColums);
   }
 
   async getRandomStory() {

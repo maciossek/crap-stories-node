@@ -2,18 +2,22 @@ import request from "supertest";
 import knex from "../../config/knex";
 import { v4 as uuid } from "uuid";
 import StoryRepository from "../story.repository";
-
+import UserRepository from "../../user/user.repository";
 const storyUuid = uuid();
 jest.mock("consola");
 
 describe("Story getStory Route", () => {
   beforeAll(async () => {
+    await knex("user").del();
     await knex("story").del();
+    const userRepo = new UserRepository();
+    const user = await userRepo.createUser("hans@wurst.de", "lolwtfhaha");
 
     await knex("story").insert({
       uuid: storyUuid,
       title: "a test story",
       imageUrl: "https://picsum.photos/300",
+      userId: user[0].id,
     });
   });
 

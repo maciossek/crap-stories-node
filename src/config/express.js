@@ -5,6 +5,7 @@ import express from "express";
 import * as mw from "../middleware";
 import routes from "./../index.routes";
 import config from "./env";
+import passport from "./passport";
 import consola from "consola";
 
 const isProd = config.env === "production";
@@ -27,9 +28,9 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(compress());
 app.use(mw.logRequests(consola));
+app.use(passport.initialize());
 
 app.use("/", routes);
-
 app.use(mw.apiError);
 
 export default app;

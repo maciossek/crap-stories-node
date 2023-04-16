@@ -2,6 +2,8 @@ import { Router } from "express";
 import httpStatus from "http-status";
 import config from "./config/env";
 import storyRoutes from "./story/story.routes";
+import userRoutes from "./user/user.routes";
+import passport from "./config/passport";
 
 const router = Router();
 
@@ -14,6 +16,13 @@ router.get("/version", (req, res) => {
   });
 });
 
-router.use("/story", storyRoutes);
+router.use("/user", userRoutes);
+router.use(
+  "/story",
+  passport.authenticate("jwt", {
+    session: false,
+  }),
+  storyRoutes
+);
 
 export default router;
