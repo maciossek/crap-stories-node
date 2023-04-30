@@ -9,3 +9,21 @@ services:
       - POSTGRES_PASSWORD=hft
       - POSTGRES_USER=hft
     restart: always
+  backend:
+    container_name: crap-stories-node
+    image: maciossek/crap-stories-node:latest
+    ports:
+      - 3001:3001
+    environment:
+      - DB_HOST=postgresql://hft:hft@postgres-hft:5432/hft
+    restart: always
+    links:
+      - postgres-hft
+    depends_on:
+      - postgres-hft
+  frontend:
+    container_name: crap-stories-react
+    image: maciossek/crap-stories-react:latest
+    ports:
+      - 3000:80
+    restart: always

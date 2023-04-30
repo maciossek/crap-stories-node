@@ -9,6 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
+    "start:seed:migrate": "npm run build && npm run migrate && npm run seed && node dist/index.js",
     "start:inspect": "npm run build && node --inspect dist/index.js",
     "start:watch": "nodemon --ignore dist/ --exec npm start",
     "test": "jest --coverage --watch --runInBand",
@@ -16,6 +17,7 @@
     "build": "swc src -d dist",
     "heroku-postbuild": "npm run build && npm run migrate",
     "migrate": "node -r @swc-node/register node_modules/.bin/knex migrate:latest",
+    "seed": "node -r @swc-node/register node_modules/.bin/knex seed:run",
     "lint": "eslint src/**/*.js"
   },
   "eslintConfig": {
