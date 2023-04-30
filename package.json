@@ -44,7 +44,7 @@
     "express-joi-validation": "5.0.1",
     "http-status": "1.5.0",
     "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^2.0.5",
+    "jwks-rsa": "^3.0.1",
     "knex": "1.0.5",
     "pg": "8.7.3",
     "uuid": "8.3.2"
