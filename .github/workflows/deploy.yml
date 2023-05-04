@@ -65,7 +65,7 @@ jobs:
           file: ./coverage/cobertura-coverage.xml
           flags: unittests # optional
           name: codecov-umbrella # optional
-      - name: 🐳 Login to Docker Hub
+      - name: 🐳 Login to Github Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -81,3 +81,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:haha
